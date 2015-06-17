@@ -53,15 +53,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <Compile Include="src\Factories\PersonFactory.cs" />
     <Compile Include="src\Launch\Program.cs" />
     <Compile Include="src\Model\Institution.cs" />
     <Compile Include="src\Model\Person.cs" />
+    <Compile Include="src\Model\InstitutionQueue.cs" />
     <Compile Include="src\Threads\PeopleProducer.cs" />
+    <Compile Include="src\Utils\Constants.cs" />
+    <Compile Include="src\Utils\RandomNameGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

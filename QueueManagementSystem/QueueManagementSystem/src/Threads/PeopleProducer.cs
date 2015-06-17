@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using QueueManagementSystem.Factories;
 using QueueManagementSystem.Model;
-using QueueManagementSystem.src.Model;
+using QueueManagementSystem.Utils;
 
 namespace QueueManagementSystem.Threads {
 	class PeopleProducer {
-		public const int PEOPLE_PRODUCER_INTERVAL = 1000;
+		//10 seconds
+		public const int PEOPLE_PRODUCER_INTERVAL = 10000;
 
 		private bool producerStarted = false;
 		private Institution institution;
@@ -22,9 +24,10 @@ namespace QueueManagementSystem.Threads {
 
 		 private void WorkThread() {
 			 while (true) {
-				 Console.WriteLine("Producing new guy...");
-				 institution.AddUnassignedPerson(new Person());
-				 Thread.Sleep(PEOPLE_PRODUCER_INTERVAL); 
+				 Person newPerson = PersonFactory.GetPerson();
+				 Console.WriteLine("Producing new guy: {0}", newPerson.Name);
+				 institution.AddUnassignedPerson(newPerson);
+				 Thread.Sleep(Constants.GetTimeSpan(PEOPLE_PRODUCER_INTERVAL)); 
 			 }
 		}
 	}
