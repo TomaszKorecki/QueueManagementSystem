@@ -1,0 +1,8 @@
+Opis programu:
+
+1. Jeden proces generuje osoby zblizajace sie do kolejki. Tworzy obiekty ludzi, parametryzując ich zgodnie z rozkladem Gaussa. Interwał czasowy uzależniony jest od pory dnia. 
+2. Drugi proces symuluje działanie czujników. Czujniki mierza parametry danej osoby i tworzą jej profil.
+3. Ten sam proces automatycznie przydziela daną osobę do odpowiednej kolejki na podstawie jej profilu oraz rozkładu osób w kolejkach.
+4. Czwarty proces obsługuje ludzi w kolejkach, usuwając ich zgodnie z odpowiednim rozkladem czasowym.
+
+
