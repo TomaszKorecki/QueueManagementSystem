@@ -12,6 +12,5 @@ namespace QueueManagementSystem.Utils {
 		public static float getTimeRatio() {
 			return 1f / SIMULATION_SPEED_MULTIPLIER;
 		}
-		
 	}
 }

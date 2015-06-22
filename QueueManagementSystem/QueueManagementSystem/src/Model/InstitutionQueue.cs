@@ -8,7 +8,7 @@ namespace QueueManagementSystem.Model {
 	class InstitutionQueue {
 		
 		private const int DEFAULT_WAITING_TIME = 100;
-		public int queueID { get; }
+		public int queueID { get; private set; }
 		private Queue<Person> peopleInQueue = new Queue<Person>();
 		private bool isQueueWorking;
 		private bool queueWorkingOrder = false;

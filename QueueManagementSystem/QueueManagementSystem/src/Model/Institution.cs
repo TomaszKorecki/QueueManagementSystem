@@ -54,12 +54,14 @@ namespace QueueManagementSystem.Model {
 		
 		private InstitutionQueue ChooseQueue(Person person) {
 			if (person.IsInvalid || person.IsPregnant) {
-				return queues.Where(a => a.queueID == 1).ToList()[0];
-			} else if (person.Temperature > 37 || person.Weight > 100 || person.Age > 60) {
-				return queues.Where(a => a.queueID == 2).ToList()[0];
-			} else {
-				return queues.Where(a => a.queueID == 3).ToList()[0];
+				return queues.SingleOrDefault(a => a.queueID == 1);
 			}
+
+			if (person.Temperature > 37 || person.Weight > 100 || person.Age > 60) {
+				return queues.SingleOrDefault(a => a.queueID == 2);
+			}
+
+			return queues.SingleOrDefault(a => a.queueID == 3);
 		}
 	}
 }

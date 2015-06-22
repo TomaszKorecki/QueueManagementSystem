@@ -6,9 +6,9 @@ namespace QueueManagementSystem.Launch {
 		private static ArgumentsParser instance;
 		
 		//  public int NumberOfQueues { get; set; }
-		public int SimulationSpeedMultiplier { get; set; }
-		public bool AreArgumentsValid { get; set; }
-		public bool IsInHelpMode { get; set; }
+		public int SimulationSpeedMultiplier { get; private set; }
+		public bool AreArgumentsValid { get; private set; }
+		public bool IsInHelpMode { get; private set; }
 		
 		private ArgumentsParser() {}
 		

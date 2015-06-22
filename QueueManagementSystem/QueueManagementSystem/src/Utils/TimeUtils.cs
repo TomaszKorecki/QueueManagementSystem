@@ -2,7 +2,7 @@
 
 namespace QueueManagementSystem.Utils {
 	class TimeUtils {
-		
+
 		public static int EstimatePeopleProducingInterval() {
 			int hour = DateTime.Now.Hour;
 			
@@ -20,9 +20,10 @@ namespace QueueManagementSystem.Utils {
 			} else {
 				seconds = RandomUtils.NextInt(1800, 3600);
 			}
-			
+
 			return ApplySimulationSpeed(seconds * 1000);
 		}
+
 
 		public static int ApplySimulationSpeed(int miliseconds) {
 			return (int)Math.Round(miliseconds * Configuration.getTimeRatio());
