@@ -46,9 +46,9 @@ namespace QueueManagementSystem.Model {
 		private void QueueWorker() {
 			while (queueWorkingOrder) {
 				if (!peopleInQueue.Any()) {
-					Thread.Sleep(Constants.GetTimeSpan(DEFAULT_WAITING_TIME));
+					Thread.Sleep(TimeUtils.ApplySimulationSpeed(DEFAULT_WAITING_TIME));
 				} else {
-					Thread.Sleep(Constants.GetTimeSpan(serviceTime));
+					Thread.Sleep(TimeUtils.ApplySimulationSpeed(serviceTime));
 					Person person = peopleInQueue.Dequeue();
 					Console.WriteLine("Queue {0} handle person {1}", queueID, person.Name);
 				}

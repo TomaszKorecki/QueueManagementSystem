@@ -60,7 +60,8 @@
     <Compile Include="src\Model\Person.cs" />
     <Compile Include="src\Model\InstitutionQueue.cs" />
     <Compile Include="src\Threads\PeopleProducer.cs" />
-    <Compile Include="src\Utils\Constants.cs" />
+    <Compile Include="src\Utils\Configuration.cs" />
+    <Compile Include="src\Utils\TimeUtils.cs" />
     <Compile Include="src\Utils\RandomNameGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

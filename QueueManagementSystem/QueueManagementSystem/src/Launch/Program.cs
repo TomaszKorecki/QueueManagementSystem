@@ -1,5 +1,6 @@
 ﻿using QueueManagementSystem.Model;
 using QueueManagementSystem.Threads;
+using QueueManagementSystem.Utils;
 
 namespace QueueManagementSystem.Launch {
 	class Program {
@@ -12,6 +13,8 @@ namespace QueueManagementSystem.Launch {
 			if (!argumentsParser.AreArgumentsValid || argumentsParser.IsInHelpMode) {
 				return;
 			}
+			
+			Configuration.Initialize(argumentsParser.NumberOfQueues, argumentsParser.SimulationSpeedMultiplier);
 
 			Institution institution = new Institution();
 

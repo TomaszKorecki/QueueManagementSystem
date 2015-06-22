@@ -40,7 +40,7 @@ namespace QueueManagementSystem.Model {
 
 		private void InstitutionWorker() {
 			while (true) {
-				Thread.Sleep(Constants.GetTimeSpan(PERSON_TO_QUEUE_INTERVAL));
+				Thread.Sleep(TimeUtils.ApplySimulationSpeed(PERSON_TO_QUEUE_INTERVAL));
 				HandleNextPerson();
 			}
 		}

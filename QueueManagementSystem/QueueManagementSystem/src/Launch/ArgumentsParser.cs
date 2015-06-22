@@ -39,6 +39,15 @@ namespace QueueManagementSystem.Launch {
 				try {
 					NumberOfQueues = int.Parse(args[0]);
 					SimulationSpeedMultiplier = int.Parse(args[1]);
+					
+					Console.WriteLine("---------------------------------------------------------------------\n" + 
+						"Welcome in Queue Management System!\n" +
+						"---------------------------------------------------------------------\n" + 
+						"Configuration in use:\n" +
+		                "Number of Queues = {0}\n" +
+		                "Simulation Speed Multiplier = {1}\n" +
+						"---------------------------------------------------------------------\n", NumberOfQueues, SimulationSpeedMultiplier);
+					
 					AreArgumentsValid = true;
 					IsInHelpMode = false;
 				} catch (Exception) {
