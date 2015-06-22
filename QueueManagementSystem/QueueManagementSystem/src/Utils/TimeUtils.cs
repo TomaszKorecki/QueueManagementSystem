@@ -15,7 +15,7 @@ namespace QueueManagementSystem.Utils {
 		private const int NIGHT_MAX = 3600;
 		private const int MILISECONDS_MULTIPLIER = 1000;
 		public static int EstimatePeopleProducingInterval() {
-			int hour = DateTime.Now.Hour;
+			int hour = Configuration.IsCurrentHourSet() ? Configuration.GetCurrentHour() : DateTime.Now.Hour;
 			
 			int seconds;
 			

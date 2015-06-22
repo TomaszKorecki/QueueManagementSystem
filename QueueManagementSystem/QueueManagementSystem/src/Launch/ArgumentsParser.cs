@@ -5,8 +5,9 @@ namespace QueueManagementSystem.Launch {
 
 		private static ArgumentsParser instance;
 		
-		//  public int NumberOfQueues { get; set; }
 		public int SimulationSpeedMultiplier { get; private set; }
+		public int CurrentHour { get; private set; }
+		public bool IsCurrentHourPassed { get; private set; }
 		public bool AreArgumentsValid { get; private set; }
 		public bool IsInHelpMode { get; private set; }
 		
@@ -22,27 +23,19 @@ namespace QueueManagementSystem.Launch {
 		}
 		
 		public ArgumentsParser Initialize(string[] args) {
-			if (args.Length == 1) {
-				if (args[0].Equals("-h", StringComparison.CurrentCultureIgnoreCase)) {
-					AreArgumentsValid = true;
-					IsInHelpMode = true;
-					Console.WriteLine("Queue Management System - intelligent and transparent system for managing queues in various institutions.\n\n" +
-                		"Command line arguments:\n\n" +
-		                "QMS.exe a\n\n" +
-		                //"a - number of queues in institution\n" +
-		                "b - simulation speed multiplier (1 -> normal, 5 -> 5 times accelerated, etc.)\n");
-				} else {
-					try {
-					//NumberOfQueues = int.Parse(args[0]);
+			if (args.Length == 1 && args[0].Equals("-h", StringComparison.CurrentCultureIgnoreCase)) {
+				AreArgumentsValid = true;
+				IsInHelpMode = true;
+				printHelpInfo();
+			} else if (args.Length == 1 || args.Length == 2) {
+				try {
 					SimulationSpeedMultiplier = int.Parse(args[0]);
+					IsCurrentHourPassed = args.Length == 2;
+					if (IsCurrentHourPassed) {
+						CurrentHour = int.Parse(args[1]);
+					}
 					
-					Console.WriteLine("---------------------------------------------------------------------\n" + 
-						"Welcome in Queue Management System!\n" +
-						"---------------------------------------------------------------------\n" + 
-						"Configuration in use:\n" +
-		                //"Number of Queues = {0}\n" +
-		                "Simulation Speed Multiplier = {0}\n" +
-						"---------------------------------------------------------------------\n", SimulationSpeedMultiplier);
+					printWelcomeInfo(IsCurrentHourPassed);
 					
 					AreArgumentsValid = true;
 					IsInHelpMode = false;
@@ -50,12 +43,32 @@ namespace QueueManagementSystem.Launch {
 					AreArgumentsValid = false;
 					Console.WriteLine("Some of arguments are invalid. Run program with -h option to see help.");
 				}
-				}
 			} else {
 				Console.WriteLine("Incorrect arguments list. Run program with -h option to see help.");
 				AreArgumentsValid = false;
-			}
+			} 
 			return instance;
+		}
+		
+		private void printHelpInfo() {
+			Console.WriteLine("Queue Management System - intelligent and transparent system for managing queues in various institutions.\n\n" +
+            		"Command line arguments:\n\n" +
+	                "QMS.exe a [b]\n\n" +
+	                "a - simulation speed multiplier (1 -> normal, 5 -> 5 times accelerated, etc.)\n" + 
+					"[b] - aktualna godzina (argument opcjonalny)");
+		}
+		
+		private void printWelcomeInfo(bool isCurrentHourPassed) {
+			Console.WriteLine("---------------------------------------------------------------------\n" + 
+				"Welcome in Queue Management System!\n" +
+				"---------------------------------------------------------------------\n" + 
+				"Configuration in use:\n" +
+                "Simulation Speed Multiplier = {0}", SimulationSpeedMultiplier);
+				
+			if (isCurrentHourPassed) {
+				Console.WriteLine("Current Hour = {0}\n", CurrentHour);
+			}
+			Console.WriteLine("---------------------------------------------------------------------\n");
 		}
 		
 	}
