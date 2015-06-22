@@ -45,7 +45,7 @@ namespace QueueManagementSystem.Model {
 				if (!peopleInQueue.Any()) {
 					Thread.Sleep(TimeUtils.ApplySimulationSpeed(DEFAULT_WAITING_TIME));
 				} else {
-					Thread.Sleep(TimeUtils.ApplySimulationSpeed((int) RandomUtils.NextGaussian(60000, 10000, 10000, 600000)));
+					Thread.Sleep(TimeUtils.ApplySimulationSpeed((int) RandomUtils.NextGaussian(90000, 15000, 10000, 600000)));
 					Person person = peopleInQueue.Dequeue();
 					Console.WriteLine("Queue {0} handle person {1}", queueID, person.Name);
 				}

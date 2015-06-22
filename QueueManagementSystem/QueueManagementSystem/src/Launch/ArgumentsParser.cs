@@ -5,7 +5,7 @@ namespace QueueManagementSystem.Launch {
 
 		private static ArgumentsParser instance;
 		
-		public int NumberOfQueues { get; set; }
+		//  public int NumberOfQueues { get; set; }
 		public int SimulationSpeedMultiplier { get; set; }
 		public bool AreArgumentsValid { get; set; }
 		public bool IsInHelpMode { get; set; }
@@ -28,25 +28,21 @@ namespace QueueManagementSystem.Launch {
 					IsInHelpMode = true;
 					Console.WriteLine("Queue Management System - intelligent and transparent system for managing queues in various institutions.\n\n" +
                 		"Command line arguments:\n\n" +
-		                "QMS.exe a b\n\n" +
-		                "a - number of queues in institution\n" +
+		                "QMS.exe a\n\n" +
+		                //"a - number of queues in institution\n" +
 		                "b - simulation speed multiplier (1 -> normal, 5 -> 5 times accelerated, etc.)\n");
 				} else {
-					Console.WriteLine("Incorrect arguments list. Run program with -h option to see help.");
-					AreArgumentsValid = false;
-				}
-			} else if (args.Length == 2) {
-				try {
-					NumberOfQueues = int.Parse(args[0]);
-					SimulationSpeedMultiplier = int.Parse(args[1]);
+					try {
+					//NumberOfQueues = int.Parse(args[0]);
+					SimulationSpeedMultiplier = int.Parse(args[0]);
 					
 					Console.WriteLine("---------------------------------------------------------------------\n" + 
 						"Welcome in Queue Management System!\n" +
 						"---------------------------------------------------------------------\n" + 
 						"Configuration in use:\n" +
-		                "Number of Queues = {0}\n" +
-		                "Simulation Speed Multiplier = {1}\n" +
-						"---------------------------------------------------------------------\n", NumberOfQueues, SimulationSpeedMultiplier);
+		                //"Number of Queues = {0}\n" +
+		                "Simulation Speed Multiplier = {0}\n" +
+						"---------------------------------------------------------------------\n", SimulationSpeedMultiplier);
 					
 					AreArgumentsValid = true;
 					IsInHelpMode = false;
@@ -54,7 +50,7 @@ namespace QueueManagementSystem.Launch {
 					AreArgumentsValid = false;
 					Console.WriteLine("Some of arguments are invalid. Run program with -h option to see help.");
 				}
-				return instance;
+				}
 			} else {
 				Console.WriteLine("Incorrect arguments list. Run program with -h option to see help.");
 				AreArgumentsValid = false;
