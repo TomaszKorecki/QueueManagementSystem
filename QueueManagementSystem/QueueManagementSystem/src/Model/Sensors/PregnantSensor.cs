@@ -1,7 +1,13 @@
-﻿namespace QueueManagementSystem.Model.Sensors {
+﻿using QueueManagementSystem.Utils;
+
+namespace QueueManagementSystem.Model.Sensors {
 	class PregnantSensor : BoolSensor {
 		public bool MeasurePerson(Person person) {
-			return person.IsPregnant;
+			if (RandomUtils.NextDouble() < 0.9) {
+				return person.IsPregnant;
+			}
+			
+			return !person.IsPregnant;
 		}
 	}
 }

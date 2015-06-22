@@ -1,10 +1,13 @@
-﻿using QueueManagementSystem.Model;
-using QueueManagementSystem.Model.Sensors;
+﻿using QueueManagementSystem.Utils;
 
-namespace QueueManagementSystem.src.Model.Sensors {
+namespace QueueManagementSystem.Model.Sensors {
 	class InvalidSensor : BoolSensor {
 		public bool MeasurePerson(Person person) {
-			return person.IsInvalid;
+			if (RandomUtils.NextDouble() < 0.9) {
+				return person.IsInvalid;
+			}
+			
+			return !person.IsInvalid;
 		}
 	}
 }

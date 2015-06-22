@@ -8,9 +8,8 @@ namespace QueueManagementSystem.Factories {
 		private const double WEIGHT_MEAN = 70d;
 		private const double TEMPERATURE_MEAN = 36.6d;
 		private const double PREGNANT_COEFFICIENT = 0.009770294d;
-		
 		private const double INVALID_COEFFICIENT = 0.16d;
-
+		
 		public static Person GetPerson() {
 			Person person = new Person();
 			

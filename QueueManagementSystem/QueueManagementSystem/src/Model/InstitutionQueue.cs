@@ -6,12 +6,10 @@ using QueueManagementSystem.Utils;
 
 namespace QueueManagementSystem.Model {
 	class InstitutionQueue {
+		
 		private const int DEFAULT_WAITING_TIME = 100;
-
 		private int queueID;
-
 		private Queue<Person> peopleInQueue = new Queue<Person>();
-		private int serviceTime;
 		private bool isQueueWorking;
 		private bool queueWorkingOrder = false;
 
@@ -25,8 +23,7 @@ namespace QueueManagementSystem.Model {
 			get { return peopleInQueue.Count; }
 		}
 
-		public InstitutionQueue(int serviceTime, int queueID) {
-			this.serviceTime = serviceTime;
+		public InstitutionQueue(int queueID) {
 			this.queueID = queueID;
 			queueThread = new Thread(QueueWorker);
 		}
@@ -48,7 +45,7 @@ namespace QueueManagementSystem.Model {
 				if (!peopleInQueue.Any()) {
 					Thread.Sleep(TimeUtils.ApplySimulationSpeed(DEFAULT_WAITING_TIME));
 				} else {
-					Thread.Sleep(TimeUtils.ApplySimulationSpeed(serviceTime));
+					Thread.Sleep(TimeUtils.ApplySimulationSpeed((int) RandomUtils.NextGaussian(60000, 10000, 10000, 600000)));
 					Person person = peopleInQueue.Dequeue();
 					Console.WriteLine("Queue {0} handle person {1}", queueID, person.Name);
 				}
