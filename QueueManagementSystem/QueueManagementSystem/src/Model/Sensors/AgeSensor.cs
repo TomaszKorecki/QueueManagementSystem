@@ -5,7 +5,7 @@ namespace QueueManagementSystem.Model.Sensors {
 		public double MeasurePerson(Person person) {
 			double rand = RandomUtils.NextDouble();
 			
-			if (rand <= 0.7) {
+			if (rand < 0.7) {
 				return person.Age;
 			} else if (rand > 0.85 ) {
 				return person.Age + RandomUtils.NextInt(5);
