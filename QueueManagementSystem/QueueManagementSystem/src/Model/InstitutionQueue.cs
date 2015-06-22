@@ -7,7 +7,12 @@ using QueueManagementSystem.Utils;
 namespace QueueManagementSystem.Model {
 	class InstitutionQueue {
 		
-		private const int DEFAULT_WAITING_TIME = 100;
+		private const int CLIENT_SERVICE_TIME_MEAN = 90000;
+		private const int CLIENT_SERVICE_TIME_STDDEV = 15000;
+		private const int CLIENT_SERVICE_TIME_MIN = 10000;
+		private const int CLIENT_SERVICE_TIME_MAX = 600000;
+		private const int CHECKING_INTERVAL = 100;
+		
 		public int queueID { get; }
 		private Queue<Person> peopleInQueue = new Queue<Person>();
 		private bool isQueueWorking;
@@ -43,9 +48,9 @@ namespace QueueManagementSystem.Model {
 		private void QueueWorker() {
 			while (queueWorkingOrder) {
 				if (!peopleInQueue.Any()) {
-					Thread.Sleep(TimeUtils.ApplySimulationSpeed(DEFAULT_WAITING_TIME));
+					Thread.Sleep(TimeUtils.ApplySimulationSpeed(CHECKING_INTERVAL));
 				} else {
-					Thread.Sleep(TimeUtils.ApplySimulationSpeed((int) RandomUtils.NextGaussian(90000, 15000, 10000, 600000)));
+					Thread.Sleep(TimeUtils.ApplySimulationSpeed((int) RandomUtils.NextGaussian(CLIENT_SERVICE_TIME_MEAN, CLIENT_SERVICE_TIME_STDDEV, CLIENT_SERVICE_TIME_MIN, CLIENT_SERVICE_TIME_MAX)));
 					Person person = peopleInQueue.Dequeue();
 					Console.WriteLine("Queue {0} handle person {1}", queueID, person.Name);
 				}
