@@ -3,12 +3,11 @@ using System.Collections.Generic;
 
 namespace QueueManagementSystem.Utils {
 	public class RandomNameGenerator {
-		private static Random random = new Random();
 		private static List<string> firstNames;
 		private static List<string> secondNames;
 
 		public static string GetRandomName() {
-			return firstNames[random.Next(firstNames.Count)];
+			return firstNames[RandomUtils.NextInt(firstNames.Count)];
 		}
 
 		static RandomNameGenerator() {
