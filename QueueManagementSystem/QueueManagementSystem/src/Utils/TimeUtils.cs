@@ -22,11 +22,11 @@ namespace QueueManagementSystem.Utils {
 			//to improve...
 			if (hour >= 6 && hour <= 9) {
 				seconds = RandomUtils.NextInt(MORNING_MIN, MORNING_MAX);
-			} else if (hour >= 10 && hour <= 13) {
+			} else if (hour > 9 && hour <= 14) {
 				seconds = RandomUtils.NextInt(NOON_MIN, NOON_MAX);
-			} else if (hour >= 14 && hour <= 18) {
+			} else if (hour > 14 && hour <= 18) {
 				seconds = RandomUtils.NextInt(AFTERNOON_MIN, AFTERNOON_MAX);
-			} else if (hour >= 19 && hour <= 21) {
+			} else if (hour > 18 && hour <= 21) {
 				seconds = RandomUtils.NextInt(EVENING_MIN, EVENING_MAX);
 			} else {
 				seconds = RandomUtils.NextInt(NIGHT_MIN, NIGHT_MAX);

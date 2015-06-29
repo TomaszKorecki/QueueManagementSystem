@@ -2,8 +2,8 @@ using System;
 
 namespace QueueManagementSystem.Utils {
 	class RandomUtils {
-		
-		private static Random random = new Random(GenerateSeed());
+
+		private static Random random = new Random();//(GenerateSeed());
 		
 		public static int NextInt(int max) {
 			return random.Next(max);

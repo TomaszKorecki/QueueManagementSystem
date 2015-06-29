@@ -14,6 +14,7 @@ namespace QueueManagementSystem.Model {
 		private const int CHECKING_INTERVAL = 100;
 		
 		public int queueID { get; private set; }
+
 		private Queue<Person> peopleInQueue = new Queue<Person>();
 		private bool isQueueWorking;
 		private bool queueWorkingOrder = false;
