@@ -24,9 +24,9 @@ namespace QueueManagementSystem.Launch {
 			PeopleProducer peopleProducer = new PeopleProducer();
 			peopleProducer.StartProducer(institution);
 			
-			institution.AddQueue(new InstitutionQueue(1));
-			institution.AddQueue(new InstitutionQueue(2));
-			institution.AddQueue(new InstitutionQueue(3));
+			institution.AddQueue(new InstitutionQueue(1, institution));
+			institution.AddQueue(new InstitutionQueue(2, institution));
+			institution.AddQueue(new InstitutionQueue(3, institution));
 
 			institution.StartInstitution();
 		}

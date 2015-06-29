@@ -14,6 +14,9 @@ namespace QueueManagementSystem.Utils {
 		private const int NIGHT_MIN = 1800;
 		private const int NIGHT_MAX = 3600;
 		private const int MILISECONDS_MULTIPLIER = 1000;
+
+		private const float MULTIPLIER = 0.2f;
+
 		public static int EstimatePeopleProducingInterval() {
 			int hour = Configuration.IsCurrentHourSet() ? Configuration.GetCurrentHour() : DateTime.Now.Hour;
 			
@@ -31,6 +34,8 @@ namespace QueueManagementSystem.Utils {
 			} else {
 				seconds = RandomUtils.NextInt(NIGHT_MIN, NIGHT_MAX);
 			}
+
+			seconds = (int) (seconds*MULTIPLIER);
 			
 			return ApplySimulationSpeed(seconds * MILISECONDS_MULTIPLIER);
 		}

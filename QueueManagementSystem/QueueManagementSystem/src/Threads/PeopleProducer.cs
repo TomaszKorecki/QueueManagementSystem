@@ -19,7 +19,7 @@ namespace QueueManagementSystem.Threads {
 		 private void WorkThread() {
 			 while (true) {
 				 Person newPerson = PersonFactory.GetPerson();
-				 Console.WriteLine("Producing new guy: {0}", newPerson.Name);
+				 //Console.WriteLine("Producing new guy: {0}", newPerson.Name);
 				 institution.AddUnassignedPerson(newPerson);
 				 Thread.Sleep(TimeUtils.EstimatePeopleProducingInterval()); 
 			 }

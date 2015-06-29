@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using QueueManagementSystem.Model.Sensors;
@@ -7,7 +8,7 @@ using QueueManagementSystem.Utils;
 namespace QueueManagementSystem.Model {
 	class Institution {
 		
-		private const int PERSON_TO_QUEUE_INTERVAL = 100;
+		private const int PERSON_TO_QUEUE_INTERVAL = 30000;
 
 		private Queue<Person> unassignedPeople = new Queue<Person>();
 		private List<InstitutionQueue> queues = new List<InstitutionQueue>();
@@ -20,7 +21,11 @@ namespace QueueManagementSystem.Model {
 		private WeightSensor weightSensor = new WeightSensor();
 
 		public void AddUnassignedPerson(Person person) {
-			unassignedPeople.Enqueue(person);
+			lock (unassignedPeople) {
+				unassignedPeople.Enqueue(person);
+			}
+			
+			DebugInstituteStatus();
 		}
 
 		private void RunAllQueues() {
@@ -34,12 +39,16 @@ namespace QueueManagementSystem.Model {
 		}
 
 		private void HandleNextPerson() {
-			if (!unassignedPeople.Any()) {
-				return;
+			lock (unassignedPeople) {
+				if (!unassignedPeople.Any()) {
+					return;
+				}
+
+				Person person = unassignedPeople.Dequeue();
+				ChooseQueue(person).AddPersonToQueue(person);
 			}
 			
-			Person person = unassignedPeople.Dequeue();
-			ChooseQueue(person).AddPersonToQueue(person);
+			DebugInstituteStatus();
 		}
 
 		private void InstitutionWorker() {
@@ -77,5 +86,18 @@ namespace QueueManagementSystem.Model {
 
 			return queues.SingleOrDefault(a => a.queueID == 3);
 		}
+
+		public void DebugInstituteStatus() {
+			Console.Clear();
+
+				foreach (var person in unassignedPeople) {
+					Console.WriteLine(person);
+				}
+
+
+				foreach (var institutionQueue in queues) {
+					Console.WriteLine(institutionQueue);
+				}
+			}
 	}
 }
