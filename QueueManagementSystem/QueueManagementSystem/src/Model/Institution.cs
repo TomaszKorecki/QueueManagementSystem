@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using QueueManagementSystem.Model.Sensors;
 using QueueManagementSystem.Utils;
 
 namespace QueueManagementSystem.Model {
@@ -11,6 +12,12 @@ namespace QueueManagementSystem.Model {
 		private Queue<Person> unassignedPeople = new Queue<Person>();
 		private List<InstitutionQueue> queues = new List<InstitutionQueue>();
 		private Thread institutionThread;
+
+		private AgeSensor ageSensor = new AgeSensor();
+		private InvalidSensor invalidSensor = new InvalidSensor();
+		private PregnantSensor pregnantSensor = new PregnantSensor();
+		private TemperatureSensor temperatureSensor = new TemperatureSensor();
+		private WeightSensor weightSensor = new WeightSensor();
 
 		public void AddUnassignedPerson(Person person) {
 			unassignedPeople.Enqueue(person);
@@ -53,11 +60,18 @@ namespace QueueManagementSystem.Model {
 		}
 		
 		private InstitutionQueue ChooseQueue(Person person) {
-			if (person.IsInvalid || person.IsPregnant) {
+			bool isPersonInvalid = invalidSensor.MeasurePerson(person);
+			bool isPersonPregnant = pregnantSensor.MeasurePerson(person);
+
+			double personTemperature = temperatureSensor.MeasurePerson(person);
+			double personWeight = weightSensor.MeasurePerson(person);
+			double personAge = ageSensor.MeasurePerson(person);
+
+			if (isPersonInvalid|| isPersonPregnant) {
 				return queues.SingleOrDefault(a => a.queueID == 1);
 			}
 
-			if (person.Temperature > 37 || person.Weight > 100 || person.Age > 60) {
+			if (personTemperature > 37 || personWeight > 100 || personAge > 60) {
 				return queues.SingleOrDefault(a => a.queueID == 2);
 			}
 
